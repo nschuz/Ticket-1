@@ -1,8 +1,6 @@
 const express = require('express')
-let usuarios = require('../routes/usuarios')
-let auth = require('../routes/auth')
 let cors = require('cors')
-const { dbConnection } = require('../database/config.databases')
+
 
 class Server {
 
@@ -10,10 +8,8 @@ class Server {
         this.app = express()
         this.port = process.env.PORT
         this.usuariosPath = '/api/usuarios';
-        this.authPath = '/api/auth'
 
-        //Conecta a base de datos
-        this.conectarDB();
+
 
         //Middlewares
         this.middlewares();
@@ -23,19 +19,13 @@ class Server {
 
     }
 
-    async conectarDB() {
-        //aqui podemo conectar multimples conexion multimples
-        //aqui solo hacemos una conexion
-        await dbConnection();
-    }
+
 
     middlewares() {
 
         //CORS
         this.app.use(cors());
 
-        //json
-        this.app.use(express.json());
 
         //Lectaura y parseo del body
         this.app.use(express.json());
@@ -47,8 +37,7 @@ class Server {
     routes() {
 
         //otro tipo de middl configuramos el router
-        this.app.use(this.authPath, auth)
-        this.app.use(this.usuariosPath, usuarios);
+        this.app.use(this.usuariosPath, require('./routes/usuarios'));
 
 
     }
@@ -62,3 +51,4 @@ class Server {
 }
 
 module.exports = Server;
+//
