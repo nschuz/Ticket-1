@@ -5,6 +5,7 @@ const btnAgregear = document.querySelector('#borrar');
 const btnEliminar = document.querySelector('#eliminar');
 const bntBorrarTitulo = document.querySelector('#borrarTitulo');
 const data = document.querySelectorAll('.data');
+const tbody = document.querySelectorAll('.tbody');
 
 
 
@@ -79,9 +80,8 @@ class UI {
         console.log(sumatoria)
         console.log(tabletr)
 
-        let i = 0,
-            j = 0;
-        while (i < tabletr.length && j < data.length) {
+        let i = 0;
+        while (i < tabletr.length) {
             //const th = tabletr[i].insertCell(2);
             const th = document.createElement('th')
             th.setAttribute('scope', 'col')
@@ -89,16 +89,16 @@ class UI {
             th.setAttribute('name', `${mesNuevo}${anioNuevo}`)
             th.textContent = `${mesNuevo}/${anioNuevo}`;
             tabletr[i].insertBefore(th, sumatoria[i]);
-            const td = document.createElement('td');
-            td.textContent = 0;
-            data[i].appendChild(td);
+            const hijos = Array.from(tbody[i].children);
+
+            for (let j = 0; j < hijos.length; j++) {
+                const td = document.createElement("td");
+                td.textContent = 0;
+                hijos[j].appendChild(td);
+            }
 
 
             i++;
-
-
-
-
         }
         this.alerta("Periodo creado", "success");
     }
