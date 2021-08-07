@@ -134,12 +134,8 @@
                 <tr class="data">
                     <th scope="row">Ingresos</th>
                     <td>
-                        <div class="form-outline">
-                            <input type="text" id="typeText" class="form-control" placeholder="Inserta igresos" />
-                            <label class="form-label" for="typeText">Inserta Ingresos</label>
-                        </div>
+                        0
                     </td>
-
                 </tr>
 
                 <tr class="data">
@@ -187,10 +183,13 @@
                 <tr class="data">
                     <th scope="row">Ventas</th>
                     <td>
+                        0
+                        <!--
                         <div class="form-outline">
-                            <input type="text" id="typeText" class="form-control" placeholder="Inserta igresos" />
-                            <label class="form-label" for="typeText">Inserta Ingresos</label>
+                          <input type="text" id="typeText" class="form-control" placeholder="Inserta igresos" />
+                            <label class="form-label" for="typeText">Inserta Ingresos</label>  
                         </div>
+                        -->
                     </td>
 
 
@@ -228,12 +227,12 @@
             <button type="button" class="btn btn-outline-danger me-3" data-mdb-ripple-color="dark">
                 Eliminiar
             </button>
-            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark">
+            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark" href="#modalCocepto" data-toggle="modal" id="agregarIngresos">
                Agregar
             </button>
         </div>
 
-        <table class="table table-hover text-nowrap mt-4">
+        <table class="table table-hover text-nowrap mt-4" id="tbingresos">
             <thead>
                 <tr class="tabletr">
                     <th scope="col">Concepto</th>
@@ -245,7 +244,7 @@
 
                 <tr class="data">
                     <th class="row">Cocepto 1</th>
-                    <td>500</td>
+                    <td>0</td>
 
                 </tr>
 
@@ -272,11 +271,11 @@
             <button type="button" class="btn btn-outline-danger me-3" data-mdb-ripple-color="dark">
                 Eliminiar
             </button>
-            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark">
+            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark" href="#modalCocepto" data-toggle="modal" id="agregarCostosDirectos">
                Agregar
             </button>
         </div>
-        <table class="table table-hover text-nowrap mt-4">
+        <table class="table table-hover text-nowrap mt-4" id="tbdirectos">
             <thead>
                 <tr class="tabletr">
                     <th scope="col">Concepto</th>
@@ -311,11 +310,11 @@
             <button type="button" class="btn btn-outline-danger me-3" data-mdb-ripple-color="dark">
                 Eliminiar
             </button>
-            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark">
+            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark" href="#modalCocepto" data-toggle="modal" id="gatosAdmin">
                Agregar
             </button>
         </div>
-        <table class="table table-hover text-nowrap mt-4">
+        <table class="table table-hover text-nowrap mt-4" id="tbadministrativos">
             <thead>
                 <tr class="tabletr">
                     <th scope="col">Concepto</th>
@@ -347,11 +346,11 @@
             <button type="button" class="btn btn-outline-danger me-3" data-mdb-ripple-color="dark">
         Eliminiar
     </button>
-            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark">
+            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark" href="#modalCocepto" data-toggle="modal" id="recursos">
        Agregar
     </button>
         </div>
-        <table class="table table-hover text-nowrap mt-4">
+        <table class="table table-hover text-nowrap mt-4" id="tbrecursos">
             <thead>
                 <tr class="tabletr">
                     <th scope="col">Concepto</th>
@@ -380,11 +379,11 @@
             <button type="button" class="btn btn-outline-danger me-3" data-mdb-ripple-color="dark">
         Eliminiar
     </button>
-            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark">
+            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark" href="#modalCocepto" data-toggle="modal" id="costos">
        Agregar
     </button>
         </div>
-        <table class="table table-hover text-nowrap mt-4">
+        <table class="table table-hover text-nowrap mt-4" id="tbcostos">
             <thead>
                 <tr class="tabletr">
                     <th scope="col">Concepto</th>
@@ -413,7 +412,7 @@
             <button type="button" class="btn btn-outline-danger me-3" data-mdb-ripple-color="dark">
 Eliminiar
 </button>
-            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark">
+            <button type="button" class="btn btn-outline-secondary " data-mdb-ripple-color="dark" href="#modalCocepto" data-toggle="modal">
 Agregar
 </button>
         </div>
@@ -488,6 +487,33 @@ Agregar
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" id="borrarTitulo">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal hide" tabindex="-1" role="dialog" id="modalCocepto">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="alerta"></div>
+                    <div class="modal-header">
+                        <h5 class="modal-title">Agregar Cocepto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+                </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Titulo del Cocepto</label>
+                            <input type="text" class="form-control" id="concepto" name="mes" aria-describedby="emailHelp" placeholder="Inserta un Titulo">
+                            <small id="emailHelp" class="form-text text-muted">Inserta un Titulo</small>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="btnConcepto">Save changes</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>

@@ -1,5 +1,12 @@
 const express = require('express')
 let cors = require('cors')
+const sequelize = require("./db/conexion");
+const { Usuario } = require('./models/Usuario');
+const { apiLimiter } = require('./middlewares/apiLimiter');
+const path = require('path');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser')
+
 
 
 class Server {
@@ -7,7 +14,11 @@ class Server {
     constructor() {
         this.app = express()
         this.port = process.env.PORT
-        this.usuariosPath = '/api/usuarios';
+        this.usuariosPath = '/it';
+
+        this.app.set('views', path.join(__dirname, '/views'));
+        console.log(path.join(__dirname, '/views'));
+        this.app.set('view engine', 'hbs');
 
 
 
@@ -17,21 +28,41 @@ class Server {
         //Rutas de mi aplicacion
         this.routes();
 
+        //conectar DBAZURE
+        this.conectarDB();
+
     }
 
 
 
     middlewares() {
 
-        //CORS
-        this.app.use(cors());
+        //Cors
+        this.app.use(cors())
 
+        //Middleware Public
+        this.app.use(express.static(path.join(__dirname, 'public')))
+        this.app.use(express.json())
+        this.app.use(express.urlencoded({ extended: true }));
+        //express-rate-limit
+        this.app.use(apiLimiter)
+        this.app.use(morgan('combined'))
+            //CookieParser
+        this.app.use(cookieParser());
+    }
 
-        //Lectaura y parseo del body
-        this.app.use(express.json());
-
-        //Directorio Publico
-        this.app.use(express.static('public'));
+    async conectarDB() {
+        try {
+            await sequelize.authenticate();
+            console.log('Conexion con la base de datos establecida');
+            await sequelize.sync();
+            //await sequelize.models.User.sync({ force: true });
+            // await Contacto.sync();
+            // await Usuario.sync();
+            console.log("Todos los modelos fueron sincronizados correctamente");
+        } catch (error) {
+            console.error('Problema al conectrase o al sicronizar modelos', error);
+        }
     }
 
     routes() {
