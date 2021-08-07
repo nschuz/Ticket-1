@@ -1,10 +1,12 @@
 const { Router } = require('express');
-const { login, registroPost, regsitroDelete } = require('../controllers/usuarios')
+const { loginGet, registroPost, regsitroDelete, loginPost } = require('../controllers/usuarios');
+const { checkDatosAlta } = require('../middlewares/usuario.midlewares');
 const router = Router();
 
 
-router.get('/login', login);
-router.post('/registro', registroPost);
+router.get('/login', loginGet);
+router.post('/login', loginPost);
+router.post('/registro', checkDatosAlta, registroPost);
 router.delete('/usuario/:id', regsitroDelete);
 
 

@@ -5,7 +5,8 @@ const { Usuario } = require('./models/Usuario');
 const { apiLimiter } = require('./middlewares/apiLimiter');
 const path = require('path');
 const morgan = require('morgan');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const { Presupueto } = require('./models/Presupuesto');
 
 
 
@@ -58,7 +59,7 @@ class Server {
             await sequelize.sync();
             //await sequelize.models.User.sync({ force: true });
             // await Contacto.sync();
-            // await Usuario.sync();
+            await Presupueto.sync();
             console.log("Todos los modelos fueron sincronizados correctamente");
         } catch (error) {
             console.error('Problema al conectrase o al sicronizar modelos', error);
@@ -69,6 +70,7 @@ class Server {
 
         //otro tipo de middl configuramos el router
         this.app.use(this.usuariosPath, require('./routes/usuarios'));
+        this.app.use(this.usuariosPath, require('./routes/aplication'));
 
 
     }
