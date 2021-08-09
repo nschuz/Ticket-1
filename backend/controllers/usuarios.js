@@ -13,6 +13,7 @@ const loginGet = (req, res) => {
 const loginPost = async(req, res) => {
     const { email, password } = req.body;
     //verificamos el correo exista 
+    //console.log(req.body)
     const usuario = await Usuario.findOne({ where: { email } });
 
 
@@ -32,6 +33,7 @@ const loginPost = async(req, res) => {
 
     const token = await crearJWT(usuario.dataValues.id_unico);
     res.cookie('token', token).redirect('/it/home');
+    //res.cookie('token', token).json('ok')
     // const isAdmin = usuario.dataValues.tipo_usuario;
     ///loged = true;
 
@@ -88,6 +90,8 @@ const regsitroDelete = async(req, res) => {
         console.log(e);
     }
 }
+
+
 
 module.exports = {
     loginGet,

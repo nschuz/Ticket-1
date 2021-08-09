@@ -12,12 +12,17 @@ const Presupueto = sequelize.define("presupuesto", {
 
     fecha_creacion: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
     },
     nombre: {
         type: Sequelize.STRING,
         allowNull: false
     },
+    descripcion: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+
     version: {
         type: Sequelize.STRING,
         allowNull: false

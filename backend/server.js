@@ -71,6 +71,7 @@ class Server {
         //otro tipo de middl configuramos el router
         this.app.use(this.usuariosPath, require('./routes/usuarios'));
         this.app.use(this.usuariosPath, require('./routes/aplication'));
+        this.app.use(this.usuariosPath, require('./routes/presupuesto'));
 
 
     }

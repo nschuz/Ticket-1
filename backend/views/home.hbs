@@ -55,7 +55,7 @@
             Sign up for free
             </button>
 
-                    <a class="btn btn-primary px-3 me-2" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button"><i class="fas fa-sign-in-alt"></i></a>
+                    <a class="btn btn-primary px-3 me-2" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button" id ="cerrarSesion2"><i class="fas fa-sign-in-alt"></i></a>
 
 
                     <a class="btn btn-dark px-3" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button"><i class="fab fa-github"></i  ></a>
@@ -75,7 +75,7 @@
         <h2>Presupuetos </h2>
         <div class="btn-toolbar d-flex d-flex justify-content-between">
             <button class="btn btn-primary" id="cerrarSesion">Cerrar Sesion</button>
-            <button class="btn btn-primary " id="cerrarSesion">Crear presupuesto +</button>
+            <button class="btn btn-primary " id="crearPresupuesto">Crear presupuesto +</button>
         </div>
 
         <div class="well mt-4">
@@ -83,27 +83,16 @@
                 <thead>
                     <tr>
                         <th>ID Presupuesto</th>
-                        <th>Fecha de Creacion</th>
-                        <th>Proyecto</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Fecha</th>
                         <th>Version</th>
+                        <th>Activo</th>
                         <th>Accion</th>
                         <th style="width: 36px;"></th>
                     </tr>
                 </thead>
                 <tbody id="tablaBody">
-                    <tr>
-                        <td>1</td>
-                        <td>2021/1</td>
-                        <td>Creacio tablas</td>
-                        <td>1.0.0</td>
-
-                        <td>
-                            <button href="#myModal2" id=${email} data-toggle="modal" class="email btn-danger"><i class="fas fa-trash-alt "></i></button>
-                            <button href="#myModal3" class="emailU btn-primary" id=${email} data-toggle="modal"><i class="fas fa-pencil-alt"></i></button>
-                            <button href="#myModal3" class="emailU btn-success" id=${email} data-toggle="modal"><i class="far fa-paper-plane"></i></button>
-                        </td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>
@@ -113,13 +102,13 @@
                 <div class="modal-content">
                     <div id="alerta"></div>
                     <div class="modal-header">
-                        <h5 class="modal-title">Eliminar Cuenta</h5>
+                        <h5 class="modal-title">Eliminar Presupuesto</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
                 </button>
                     </div>
                     <div class="modal-body">
-                        <p>Desea Eliminar la cuenta.</p>
+                        <p>Desea Eliminar el presupuesto.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" id="borrar">Save changes</button>
@@ -142,14 +131,7 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email</label>
-                                <input type="email" class="form-control" id="inputemail" aria-describedby="emailHelp" placeholder="Inserta email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="inputpassword" placeholder="Inserta Password">
-                            </div>
+                           
 
 
                             <div class="form-group">
@@ -157,8 +139,16 @@
                                 <input type="text" class="form-control" id="inputnombre" aria-describedby="emailHelp" placeholder="Inserta Nombre">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Apellido</label>
-                                <input type="text" class="form-control" id="inputapellido" placeholder="Inserta Apellido">
+                                <label for="exampleInputPassword1">Descripcion</label>
+                                <input type="text" class="form-control" id="inputdescripcion" placeholder="Inserta Descripcion">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Fecha</label>
+                                <input type="text" class="form-control" id="inputfecha" placeholder="Inserta Fecha">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Vesrsion</label>
+                                <input type="text" class="form-control" id="inputversion" placeholder="Inserta Version">
                             </div>
 
                             <div class="form-group">
@@ -223,6 +213,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="/js/signOut.js"></script>
+    <script src="/js/home.js"></script>
 
 </body>
 
