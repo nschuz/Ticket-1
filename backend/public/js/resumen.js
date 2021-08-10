@@ -11,6 +11,8 @@ const agregarCostosDirectos = document.querySelector('#agregarCostosDirectos');
 const agregarGastosAdmin = document.querySelector('#gatosAdmin');
 const agregarRecursos = document.querySelector('#recursos');
 const agregarCostos = document.querySelector('#costos');
+let contador1 = 0;
+let contador2 = 0;
 
 window.onload = function() {
     btnAgregear.addEventListener('click', agregarFlujo);
@@ -20,6 +22,7 @@ window.onload = function() {
     agregarGastosAdmin.addEventListener('click', () => { agregarTitulo("administrativos") });
     agregarRecursos.addEventListener('click', () => { agregarTitulo("recursos") });
     agregarCostos.addEventListener('click', () => { agregarTitulo("costos") });
+
 
 
 }
@@ -97,7 +100,7 @@ class UI {
     alerta(message, error) {
         const mensaje = document.createElement("div");
         mensaje.classList.add('alert');
-        if (error === "error") {
+        if (error === "error" || error === "periodo") {
             mensaje.classList.add('alert-danger');
         } else {
             mensaje.classList.add('alert-success');
@@ -107,8 +110,19 @@ class UI {
         //agegar al dom
         //Agregar al dom
         if (!document.querySelector('.alert')) {
+            if (error == "periodo") {
+                const div = document.querySelector('#alertaPeriodo');
+                console.log("hola periodo", div)
+                console.log(mensaje)
+                div.appendChild(mensaje);
+            }
             document.querySelector('#alerta').appendChild(mensaje);
+
         }
+
+
+
+
 
         //Quitar la laerta despues de 5 segundos 
         setTimeout(() => {
@@ -131,8 +145,24 @@ class UI {
             const hijos = Array.from(tbody[i].children);
             for (let j = 0; j < hijos.length; j++) {
                 const td = document.createElement("td");
-                td.textContent = 0;
+                const inputIngresos = (hijos[j].children);
+                console.log((inputIngresos[0].firstChild).textContent)
+                if ((inputIngresos[0].firstChild).textContent == "Ingresos") {
+                    td.innerHTML = `<div class="form-outline">
+                    <input type="text" id="inputIngresos${++contador1}" class="form-control" placeholder="Inserta igresos" />
+                      <label class="form-label" for="typeText">Inserta Ingresos</label>  
+                  </div>`;
+                } else if ((inputIngresos[0].firstChild).textContent == "Ventas") {
+                    td.innerHTML = `<div class="form-outline">
+                    <input type="text" id="inputventas${++contador2}" class="form-control" placeholder="Inserta igresos" />
+                      <label class="form-label" for="typeText">Inserta Ingresos</label>  
+                  </div>`;
+                } else {
+                    td.textContent = 0;
+                }
+                console.log(hijos[j].children)
                 hijos[j].insertBefore(td, hijos[j].lastElementChild);
+                //hijos[j].appendChild(td);
             }
             i++;
         }
@@ -172,15 +202,47 @@ class UI {
     }
     insertarConcepto(tabla) {
         const btnSave = document.querySelector('#btnConcepto');
-        const thisTabla = tabla.children;
-        const tbody = thisTabla[1];
+        let thisTabla = tabla.children;
+        let tbody = thisTabla[1];
+        let thead = thisTabla[0];
+        console.log("tbody", tbody);
+        console.log("thead", thead);
+        let titulosTabla = thead.children;
+        let tamañoTabla = titulosTabla[0].children
 
-        btnSave.addEventListener('click', function() {
 
-            console.log(thisTabla);
-            console.log(tbody);
-            console.log(document.querySelector('#concepto').value)
+        btnSave.addEventListener('click', function(e) {
+            console.log(tamañoTabla.length)
+
+            if (tamañoTabla.length <= 2) {
+                ui.alerta('Error necesita insertar un perido', "periodo")
+                alert("Inserte un periodo primero")
+                console.log("Inserte un periodo");
+                return;
+            }
+
+            let valor = document.querySelector('#concepto').value;
+            let tr = document.createElement('tr');
+            tr.classList.add('data');
+
+            let th = document.createElement('th');
+            let td = document.createElement('td');
+            th.classList.add('row');
+            th.setAttribute('id', `${valor}`)
+            th.textContent = valor;
+            td.textContent = "5";
+
+            tr.appendChild(th);
+            tr.appendChild(td);
+            tbody.insertBefore(tr, tbody.lastElementChild);
+            thisTabla = "";
+            tbody = ""
+            thead = ""
+
+            e.stopPropagation();
         })
+
+        thisTabla = "";
     }
 }
 

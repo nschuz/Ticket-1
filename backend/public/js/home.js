@@ -1,3 +1,4 @@
+import { CerrarSesion } from './signout.js'
 class Home {
     constructor(enpoint) {
         this.enpoint = enpoint;
@@ -92,10 +93,16 @@ class Home {
 
 window.onload = async function() {
     await home.renderPresuouestos();
+    console.log("hoooo")
     const deletebtn = document.querySelectorAll('.email');
     const updatebtn = document.querySelectorAll('.emailU');
     const btnBorrar = document.querySelector('#borrar')
     const btnUpdate = document.querySelector('#modificar')
+    const boton1 = document.querySelector('#cerrarSesion');
+    const boton2 = document.querySelector('#cerrarSesion2');
+
+    boton1.addEventListener('click', signout.cerrarSesion);
+    boton2.addEventListener('click', signout.cerrarSesion);
 
     for (let i = 0; i < deletebtn.length; i++) {
         deletebtn[i].addEventListener('click', () => {
@@ -124,3 +131,4 @@ window.onload = async function() {
 }
 
 const home = new Home("http://localhost:8080/it/presupuestos");
+const signout = new CerrarSesion();

@@ -7,6 +7,10 @@ const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const { Presupueto } = require('./models/Presupuesto');
+const { CostoAdministrativo } = require('./models/CostoAdministrativo');
+const { CostoDirecto } = require('./models/CostoDirecto');
+const { FlujoAdminsitativo } = require('./models/FlujoEfectivo');
+const { Ingreso } = require('./models/Ingresos');
 
 
 
@@ -60,6 +64,17 @@ class Server {
             //await sequelize.models.User.sync({ force: true });
             // await Contacto.sync();
             await Presupueto.sync();
+            await CostoAdministrativo.sync();
+            await CostoDirecto.sync();
+            await FlujoAdminsitativo.sync();
+            await Ingreso.sync();
+
+            CostoAdministrativo.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
+            CostoDirecto.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
+            FlujoAdminsitativo.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
+            Ingreso.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
+
+
             console.log("Todos los modelos fueron sincronizados correctamente");
         } catch (error) {
             console.error('Problema al conectrase o al sicronizar modelos', error);

@@ -7,7 +7,8 @@ const Presupueto = sequelize.define("presupuesto", {
     id_presupuesto: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        autoIncrementIdentity: true
     },
 
     fecha_creacion: {
@@ -22,7 +23,6 @@ const Presupueto = sequelize.define("presupuesto", {
         type: Sequelize.STRING,
         allowNull: false
     },
-
     version: {
         type: Sequelize.STRING,
         allowNull: false
@@ -31,11 +31,7 @@ const Presupueto = sequelize.define("presupuesto", {
         type: Sequelize.BOOLEAN,
         defaultValue: true
     },
-
-
 });
-
-
 module.exports = {
     Presupueto
 };
