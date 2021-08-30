@@ -1,3 +1,4 @@
+const { loginPostService } = require('../services/loginPost.service');
 const { registroUser } = require('../services/registro.service');
 const { deleteUser } = require('../services/registroDelete.service');
 
@@ -9,9 +10,8 @@ const loginGet = (req, res) => {
 
 const loginPost = async(req, res) => {
     const { email, password } = req.body;
-    //verificamos el correo exista 
-    //console.log(req.body)
-    loginPost(email, password, req, res);
+    console.log(email, password);
+    loginPostService(email, password, req, res);
 }
 
 

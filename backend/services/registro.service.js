@@ -5,6 +5,7 @@ const { Usuario } = require('../models/Usuario');
 
 
 const registroUser = async(nombre, apellido, email, password, req, res) => {
+
     try {
 
         //ciframos la contraseña

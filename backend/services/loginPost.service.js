@@ -3,7 +3,8 @@ const { Usuario } = require('../models/Usuario');
 const { crearJWT } = require('../services/crearJWT.service');
 
 
-const loginPost = (email, password, req, res) => {
+const loginPostService = async(email, password, req, res) => {
+
     const usuario = await Usuario.findOne({ where: { email } });
 
 
@@ -23,5 +24,5 @@ const loginPost = (email, password, req, res) => {
     res.cookie('token', token).redirect('/it/home');
 }
 module.exports = {
-    loginPost
+    loginPostService
 }
