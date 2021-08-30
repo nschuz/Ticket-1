@@ -68,13 +68,10 @@ class Server {
             await CostoDirecto.sync();
             await FlujoAdminsitativo.sync();
             await Ingreso.sync();
-
             CostoAdministrativo.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
             CostoDirecto.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
             FlujoAdminsitativo.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
             Ingreso.belongsTo(Presupueto, { foreignKey: 'id_presupuesto' })
-
-
             console.log("Todos los modelos fueron sincronizados correctamente");
         } catch (error) {
             console.error('Problema al conectrase o al sicronizar modelos', error);
